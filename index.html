@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Oracle des 5 Ans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --primary-text: #e0e0e0;
+            --accent-color: #0f3460;
+            --highlight-color: #e94560;
+            --font-title: 'Merriweather', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            font-family: var(--font-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .oracle-container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--accent-color);
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            color: var(--highlight-color);
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .intro {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 300;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .card-display {
+            background-color: var(--bg-color);
+            border: 1px dashed var(--accent-color);
+            border-radius: 10px;
+            min-height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .card-display.fade {
+            opacity: 0;
+        }
+
+        #question-text {
+            font-family: var(--font-title);
+            font-style: italic;
+            font-size: 1.4em;
+            line-height: 1.5;
+            font-weight: 400;
+            margin: 0;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #draw-button {
+            background-color: var(--highlight-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 35px;
+            font-size: 1.2em;
+            font-family: var(--font-body);
+            font-weight: 400;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        #draw-button:hover {
+            background-color: #ff5a7b;
+            transform: translateY(-2px);
+        }
+
+        #draw-button:disabled {
+            background-color: var(--accent-color);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.8em;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 600px) {
+            .oracle-container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .intro {
+                font-size: 1em;
+            }
+            #question-text {
+                font-size: 1.2em;
+            }
+            #draw-button {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="oracle-container">
+        <h1>L'Oracle des 5 Ans</h1>
+        <p class="intro">
+            Cet oracle est un miroir tendu à votre histoire. Chaque question est une porte vers une discussion honnête. Écoutez avec le cœur, parlez avec sincérité.
+        </p>
+
+        <div class="card-display" id="card-display">
+            <p id="question-text">Cliquez sur le bouton pour révéler votre première question.</p>
+        </div>
+
+        <button id="draw-button">Tirer une question</button>
+
+        <footer>
+            <p>Un outil de réflexion pour les cœurs en questionnement.</p>
+        </footer>
+    </div>
+
+    <script>
+        const questions = [
+            // Réflexion sur le passé
+            "Quel est le souvenir le plus heureux que nous ayons créé ensemble et pourquoi est-il si précieux pour toi ?",
+            "À quel moment as-tu senti pour la première fois que nous commencions à nous éloigner ?",
+            "Quelle qualité que j'admirais chez toi au début de notre relation est toujours celle que je préfère aujourd'hui ?",
+            "Y a-t-il une promesse que nous nous sommes faite et que nous n'avons pas tenue ?",
+            "Si tu pouvais revivre une seule journée de notre histoire, laquelle choisirais-tu et pourquoi ?",
+            "Comment notre relation a-t-elle changé la personne que j'étais il y a 5 ans ?",
+            "Quel a été le plus grand défi que nous avons surmonté ensemble, et qu'avons-nous appris de cette épreuve ?",
+            "Y a-t-il quelque chose de notre 'nous' du début qui te manque terriblement aujourd'hui ?",
+            "Quand t'es-tu senti le plus fier/fière de nous en tant que couple ?",
+            "Quelle est la chose la plus importante que tu as apprise de moi ?",
+
+            // État des lieux du présent
+            "Si tu devais décrire notre relation aujourd'hui en trois mots, quels seraient-ils ?",
+            "Quand te sens-tu le plus seul(e), même lorsque nous sommes ensemble ?",
+            "Quelle est la chose que j'ai arrêtée de faire et qui te manque le plus ?",
+            "De quelle manière te sens-tu vraiment vu(e), entendu(e) et compris(e) par moi aujourd'hui ?",
+            "Quelle est la conversation que nous évitons constamment ?",
+            "Qu'est-ce qui te pèse le plus dans notre quotidien commun ?",
+            "À l'inverse, qu'est-ce qui illumine encore ta journée dans notre vie à deux ?",
+            "Sentons-nous encore que nous formons une équipe face aux difficultés ?",
+            "Sur une échelle de 1 à 10, à quel point te sens-tu épanoui(e) dans notre relation en ce moment ?",
+            "Quelle est la dernière fois que tu as ri aux larmes avec moi ?",
+
+            // Vision du futur
+            "À quoi ressemble une journée parfaite pour toi dans 5 ans, avec moi dedans ?",
+            "Et si tu osais l'imaginer... à quoi ressemblerait cette même journée sans moi ?",
+            "Quelle est ta plus grande peur si nous nous séparons ?",
+            "Quelle est ta plus grande peur si nous restons ensemble et que rien ne change ?",
+            "Avons-nous encore des rêves communs, ou seulement des habitudes communes ?",
+            "Quel sacrifice serais-tu prêt(e) à faire pour notre avenir commun ?",
+            "Sur quel aspect de ta vie n'es-tu absolument pas prêt(e) à faire de compromis pour notre relation ?",
+            "Si nous décidons de continuer, quel est LE premier changement que nous devons faire ?",
+            "Croyons-nous encore que nous pouvons nous rendre heureux mutuellement à long terme ?",
+            "Si un sage nous disait que notre histoire a une fin, comment voudrais-tu vivre le temps qu'il nous reste ?",
+
+            // Besoins individuels et croissance
+            "De quoi as-tu besoin de ma part en ce moment que tu n'oses pas demander ?",
+            "Qu'est-ce que cette relation t'empêche de devenir ou d'accomplir, selon toi ?",
+            "À l'inverse, qu'est-ce que cette relation te permet d'être ou d'accomplir ?",
+            "Te sens-tu libre d'être toi-même à 100% avec moi, y compris tes facettes moins jolies ?",
+            "Quel est ton besoin le plus profond qui n'est pas comblé dans notre relation (sécurité, passion, reconnaissance, liberté...) ?",
+            "Comment puis-je mieux soutenir tes passions et tes projets personnels ?",
+            "Quand te sens-tu le plus toi-même : quand tu es avec moi, avec tes amis, ou seul(e) ?",
+            "Ai-je perdu une partie de moi-même dans cette relation ? Si oui, laquelle ?",
+            "Quelle est la chose que tu admires chez moi et que tu aimerais que je cultive davantage ?",
+            "Si tu n'avais pas peur de me blesser, quelle vérité me dirais-tu sur nous ?",
+
+            // Amour, intimité et connexion
+            "L'amour que tu ressens pour moi a-t-il changé de nature avec le temps ? Comment ?",
+            "Que signifie 'je t'aime' pour toi, aujourd'hui, quand tu me le dis ?",
+            "Au-delà du sexe, comment pourrions-nous recréer de l'intimité et de la complicité ?",
+            "Quand te sens-tu le plus connecté(e) à moi ?",
+            "Y a-t-il une part de toi que tu as peur de me montrer ?",
+            "Si notre amour était une plante, de quel soin aurait-elle le plus besoin pour refleurir ?",
+            "Sommes-nous encore des amants, ou sommes-nous devenus de simples partenaires de vie ?",
+            "Quelle est la chose la plus romantique que je pourrais faire pour toi cette semaine ?",
+            "Comment puis-je te montrer mon amour d'une manière qui te parle vraiment ?",
+            "Au fond de toi, as-tu encore de l'espoir pour nous ?"
+        ];
+
+        let remainingQuestions = [...questions];
+        const drawButton = document.getElementById('draw-button');
+        const questionText = document.getElementById('question-text');
+        const cardDisplay = document.getElementById('card-display');
+        let initialClick = true;
+
+        drawButton.addEventListener('click', () => {
+            if (initialClick) {
+                initialClick = false;
+            }
+
+            if (remainingQuestions.length === 0) {
+                questionText.textContent = "Vous avez exploré toutes les questions. Prenez le temps d'intégrer vos échanges. L'oracle est prêt pour un nouveau cycle si vous le souhaitez.";
+                drawButton.textContent = "Recommencer";
+                remainingQuestions = [...questions]; // Reset for a new session
+                return;
+            }
+            
+            if (drawButton.textContent === "Recommencer") {
+                 drawButton.textContent = "Tirer une question";
+            }
+
+            // Fade out animation
+            cardDisplay.classList.add('fade');
+
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+                const selectedQuestion = remainingQuestions[randomIndex];
+                
+                // Remove the question from the pool to avoid duplicates
+                remainingQuestions.splice(randomIndex, 1);
+                
+                questionText.textContent = selectedQuestion;
+
+                // Fade in animation
+                cardDisplay.classList.remove('fade');
+            }, 500); // This duration should match the CSS transition duration
+        });
+    </script>
+</body>
+</html>
