@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Oracle des Coeurs Connectés</title>
+    <title>The Oracle of Hearts</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
@@ -192,16 +192,16 @@
     <canvas id="star-background"></canvas>
 
     <div class="oracle-container">
-        <h1>L'Oracle des Cœurs</h1>
+        <h1>The Oracle of Hearts</h1>
         <p class="intro">
-            5 ans est une étape. Ce n'est pas une fin, mais un carrefour. Chaque question est une étoile pour vous guider. Parlez avec douceur, écoutez avec courage.
+            Five years is a milestone. It's not an ending, but a crossroads. Each question is a star to guide your way. Speak with softness, listen with courage.
         </p>
 
         <div class="card-flipper" id="card-flipper">
             <div class="card-inner">
                 <div class="card-face card-front">
                     <div class="card-front-icon">◇</div>
-                    <p class="card-front-text">L'univers attend votre intention.</p>
+                    <p class="card-front-text">The universe awaits your intention.</p>
                 </div>
                 <div class="card-face card-back">
                     <p id="question-text"></p>
@@ -209,74 +209,74 @@
             </div>
         </div>
 
-        <button id="draw-button">Tirer une carte</button>
+        <button id="draw-button">Draw a Card</button>
 
         <footer>
-            <p>Conçu pour éclairer les chemins du cœur.</p>
+            <p>Designed to illuminate the paths of the heart.</p>
         </footer>
     </div>
 
     <script>
         const questions = [
-            // Réflexion sur le passé
-            "Quel est le souvenir le plus heureux que nous ayons créé ensemble et pourquoi est-il si précieux pour toi ?",
-            "À quel moment as-tu senti pour la première fois que nous commencions à nous éloigner ?",
-            "Quelle qualité que j'admirais chez toi au début de notre relation est toujours celle que je préfère aujourd'hui ?",
-            "Y a-t-il une promesse que nous nous sommes faite et que nous n'avons pas tenue ?",
-            "Si tu pouvais revivre une seule journée de notre histoire, laquelle choisirais-tu et pourquoi ?",
-            "Comment notre relation a-t-elle changé la personne que j'étais il y a 5 ans ?",
-            "Quel a été le plus grand défi que nous avons surmonté ensemble, et qu'avons-nous appris de cette épreuve ?",
-            "Y a-t-il quelque chose de notre 'nous' du début qui te manque terriblement aujourd'hui ?",
-            "Quand t'es-tu senti le plus fier/fière de nous en tant que couple ?",
-            "Quelle est la chose la plus importante que tu as apprise de moi ?",
+            // Reflecting on the Past
+            "What is the happiest memory we've created together, and why is it so precious to you?",
+            "When did you first feel that we started to drift apart?",
+            "What quality I admired in you at the start of our relationship is still the one I cherish most today?",
+            "Is there a promise we made to each other that we haven't kept?",
+            "If you could relive one single day of our story, which one would you choose and why?",
+            "How has our relationship changed the person I was 5 years ago?",
+            "What was the greatest challenge we overcame together, and what did we learn from it?",
+            "Is there something about the 'us' from the beginning that you deeply miss today?",
+            "When did you feel most proud of us as a couple?",
+            "What is the most important thing you have learned from me?",
 
-            // État des lieux du présent
-            "Si tu devais décrire notre relation aujourd'hui en trois mots, quels seraient-ils ?",
-            "Quand te sens-tu le plus seul(e), même lorsque nous sommes ensemble ?",
-            "Quelle est la chose que j'ai arrêtée de faire et qui te manque le plus ?",
-            "De quelle manière te sens-tu vraiment vu(e), entendu(e) et compris(e) par moi aujourd'hui ?",
-            "Quelle est la conversation que nous évitons constamment ?",
-            "Qu'est-ce qui te pèse le plus dans notre quotidien commun ?",
-            "À l'inverse, qu'est-ce qui illumine encore ta journée dans notre vie à deux ?",
-            "Sentons-nous encore que nous formons une équipe face aux difficultés ?",
-            "Sur une échelle de 1 à 10, à quel point te sens-tu épanoui(e) dans notre relation en ce moment ?",
-            "Quelle est la dernière fois que tu as ri aux larmes avec moi ?",
+            // The State of the Present
+            "If you had to describe our relationship today in three words, what would they be?",
+            "When do you feel most alone, even when we are together?",
+            "What is something I've stopped doing that you miss the most?",
+            "In what way do you feel truly seen, heard, and understood by me today?",
+            "What is the one conversation we constantly avoid?",
+            "What weighs most heavily on you in our daily life together?",
+            "Conversely, what still brightens your day in our life as a couple?",
+            "Do we still feel like we are a team when facing difficulties?",
+            "On a scale of 1 to 10, how fulfilled do you feel in our relationship right now?",
+            "When was the last time you laughed until you cried with me?",
 
-            // Vision du futur
-            "À quoi ressemble une journée parfaite pour toi dans 5 ans, avec moi dedans ?",
-            "Et si tu osais l'imaginer... à quoi ressemblerait cette même journée sans moi ?",
-            "Quelle est ta plus grande peur si nous nous séparons ?",
-            "Quelle est ta plus grande peur si nous restons ensemble et que rien ne change ?",
-            "Avons-nous encore des rêves communs, ou seulement des habitudes communes ?",
-            "Quel sacrifice serais-tu prêt(e) à faire pour notre avenir commun ?",
-            "Sur quel aspect de ta vie n'es-tu absolument pas prêt(e) à faire de compromis pour notre relation ?",
-            "Si nous décidons de continuer, quel est LE premier changement que nous devons faire ?",
-            "Croyons-nous encore que nous pouvons nous rendre heureux mutuellement à long terme ?",
-            "Si un sage nous disait que notre histoire a une fin, comment voudrais-tu vivre le temps qu'il nous reste ?",
+            // Vision for the Future
+            "What does a perfect day look like for you in 5 years, with me in it?",
+            "And if you dared to imagine... what would that same day look like without me?",
+            "What is your biggest fear if we separate?",
+            "What is your biggest fear if we stay together and nothing changes?",
+            "Do we still have shared dreams, or just shared habits?",
+            "What sacrifice would you be willing to make for our future together?",
+            "What aspect of your life are you absolutely not willing to compromise on for our relationship?",
+            "If we decide to continue, what is THE first change we must make?",
+            "Do we still believe we can make each other happy in the long term?",
+            "If a wise person told us our story has an end, how would you want to live the time we have left?",
 
-            // Besoins individuels et croissance
-            "De quoi as-tu besoin de ma part en ce moment que tu n'oses pas demander ?",
-            "Qu'est-ce que cette relation t'empêche de devenir ou d'accomplir, selon toi ?",
-            "À l'inverse, qu'est-ce que cette relation te permet d'être ou d'accomplir ?",
-            "Te sens-tu libre d'être toi-même à 100% avec moi, y compris tes facettes moins jolies ?",
-            "Quel est ton besoin le plus profond qui n'est pas comblé dans notre relation (sécurité, passion, reconnaissance, liberté...) ?",
-            "Comment puis-je mieux soutenir tes passions et tes projets personnels ?",
-            "Quand te sens-tu le plus toi-même : quand tu es avec moi, avec tes amis, ou seul(e) ?",
-            "Ai-je perdu une partie de moi-même dans cette relation ? Si oui, laquelle ?",
-            "Quelle est la chose que tu admires chez moi et que tu aimerais que je cultive davantage ?",
-            "Si tu n'avais pas peur de me blesser, quelle vérité me dirais-tu sur nous ?",
+            // Individual Needs and Growth
+            "What do you need from me right now that you're afraid to ask for?",
+            "What do you feel this relationship is holding you back from becoming or achieving?",
+            "Conversely, what does this relationship empower you to be or to accomplish?",
+            "Do you feel free to be 100% yourself with me, including your less 'pretty' sides?",
+            "What is your deepest need that is not being met in our relationship (e.g., security, passion, recognition, freedom...)?",
+            "How can I better support your personal passions and projects?",
+            "When do you feel most like yourself: when you are with me, with your friends, or alone?",
+            "Have I lost a part of myself in this relationship? If so, which part?",
+            "What is something you admire in me that you wish I would cultivate more?",
+            "If you weren't afraid of hurting my feelings, what truth would you tell me about us?",
 
-            // Amour, intimité et connexion
-            "L'amour que tu ressens pour moi a-t-il changé de nature avec le temps ? Comment ?",
-            "Que signifie 'je t'aime' pour toi, aujourd'hui, quand tu me le dis ?",
-            "Au-delà du sexe, comment pourrions-nous recréer de l'intimité et de la complicité ?",
-            "Quand te sens-tu le plus connecté(e) à moi ?",
-            "Y a-t-il une part de toi que tu as peur de me montrer ?",
-            "Si notre amour était une plante, de quel soin aurait-elle le plus besoin pour refleurir ?",
-            "Sommes-nous encore des amants, ou sommes-nous devenus de simples partenaires de vie ?",
-            "Quelle est la chose la plus romantique que je pourrais faire pour toi cette semaine ?",
-            "Comment puis-je te montrer mon amour d'une manière qui te parle vraiment ?",
-            "Au fond de toi, as-tu encore de l'espoir pour nous ?"
+            // Love, Intimacy, and Connection
+            "Has the nature of the love you feel for me changed over time? How?",
+            "What does 'I love you' mean to you, today, when you say it to me?",
+            "Beyond sex, how could we recreate intimacy and complicity?",
+            "When do you feel most connected to me?",
+            "Is there a part of you that you're afraid to show me?",
+            "If our love were a plant, what care would it need most to blossom again?",
+            "Are we still lovers, or have we become just life partners?",
+            "What is the most romantic thing I could do for you this week?",
+            "How can I show you my love in a way that truly speaks to you?",
+            "Deep down, do you still have hope for us?"
         ];
 
         let remainingQuestions = [...questions];
@@ -290,45 +290,48 @@
             if (isFlipping) return;
 
             if (remainingQuestions.length === 0) {
-                // Reset logic
-                remainingQuestions = [...questions];
-                questionText.textContent = "Vous avez exploré toutes les étoiles. Un nouveau cycle peut commencer.";
-                drawButton.textContent = "Recommencer le voyage";
+                if (cardFlipper.classList.contains('is-flipped')) {
+                    cardFlipper.classList.remove('is-flipped');
+                }
+                setTimeout(() => {
+                    remainingQuestions = [...questions];
+                    document.querySelector('.card-front-text').textContent = "You have explored all the stars. A new cycle can begin.";
+                    drawButton.textContent = "Begin Again";
+                    isFirstDraw = true;
+                }, 300);
                 return;
             }
             
             isFlipping = true;
             
-            if(drawButton.textContent !== "Tirer une carte") {
-                 drawButton.textContent = "Tirer une carte";
+            if (drawButton.textContent !== "Draw a Card") {
+                 drawButton.textContent = "Draw a Card";
+            }
+            if (document.querySelector('.card-front-text').textContent !== "The universe awaits your intention.") {
+                document.querySelector('.card-front-text').textContent = "The universe awaits your intention.";
             }
 
-            // Flip the card
-            cardFlipper.classList.toggle('is-flipped');
+            cardFlipper.classList.add('is-flipped');
 
             setTimeout(() => {
-                // Change text mid-flip
                 const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
                 const selectedQuestion = remainingQuestions[randomIndex];
                 remainingQuestions.splice(randomIndex, 1);
                 questionText.textContent = selectedQuestion;
 
                 if (remainingQuestions.length === 0) {
-                    drawButton.textContent = "Terminer le cycle";
+                    drawButton.textContent = "Complete the Cycle";
                 }
 
                 isFlipping = false;
-            }, (isFirstDraw ? 0 : 300)); // Change text immediately on first draw, then mid-flip
+            }, (isFirstDraw ? 0 : 300));
             
             isFirstDraw = false;
         });
 
-        // --- Starry Background Animation ---
         const canvas = document.getElementById('star-background');
         const ctx = canvas.getContext('2d');
-
         let width, height, stars;
-
         const starCount = 100;
         const starSpeed = 0.5;
 
@@ -337,7 +340,6 @@
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
-            
             stars = [];
             for (let i = 0; i < starCount; i++) {
                 stars.push({
@@ -355,27 +357,22 @@
             ctx.clearRect(0, 0, width, height);
             ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-deep-space').trim();
             ctx.fillRect(0,0,width,height);
-            
             stars.forEach(star => {
                 star.x += star.vx;
                 star.y += star.vy;
-
                 if (star.x < 0 || star.x > width) star.vx = -star.vx;
                 if (star.y < 0 || star.y > height) star.vy = -star.vy;
-
                 ctx.beginPath();
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(224, 224, 224, ${star.alpha})`;
                 ctx.fill();
             });
-
             requestAnimationFrame(animate);
         }
         
         window.addEventListener('resize', init);
         init();
         animate();
-
     </script>
 </body>
 </html>
